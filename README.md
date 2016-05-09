@@ -21,8 +21,13 @@ At the end, the number of bugs found by each heuristic i.e. Random walk and rand
 A sample output is as follows:
 
 Number of nodes = 23014
+
 Number of edges = 24028
+
 Total Number of bugs 230
+
 Buggy states from random walk 58
+
 Buggy states from random walk + bounded BFS 79
+
 Number of states that might violate liveness 180
