@@ -17,3 +17,12 @@ The steps to compile and run the code is as follows:
 
 The above command will compile taking into account all project dependencies and run the code for 20 minutes showing how each thread makes a transition in the byte state space.
 At the end, the number of bugs found by each heuristic i.e. Random walk and random walk + bounded BFS for safety violations and Bounded DFS + Random walks for liveness violations will be output. The total number of nodes, edges and the injected bugs will also be output.
+
+A sample output is as follows:
+
+Number of nodes = 23014
+Number of edges = 24028
+Total Number of bugs 230
+Buggy states from random walk 58
+Buggy states from random walk + bounded BFS 79
+Number of states that might violate liveness 180
