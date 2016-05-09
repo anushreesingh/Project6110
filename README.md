@@ -31,3 +31,5 @@ Buggy states from random walk 58
 Buggy states from random walk + bounded BFS 79
 
 Number of states that might violate liveness 180
+
+The repository also contains images of some sample graphs obtained by my code. Some are not randomized and later I randomized them to obtain large cycles.
