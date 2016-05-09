@@ -188,30 +188,11 @@ object Threads {
                                                                   else                Nil)))
                      
                      }}
-  //println(g.toDot(root,edgeTransformer));
   
   //Implementing the walks to find bugs
      var n1 = g get "0 0 0";
      
-//     //Implement 10 pure random walks
-//     for( k<-0 to 10)
-//     {
-//       while((n1 findSuccessor (_.edges forall (_.directed))) != None)
-//       {
-//         val builder = g.newWalkBuilder(n1);
-//         val n2= randomSuccessor(n1);         
-//         builder.add(n2);        
-//         n1 = n2;
-//         if(n1.value contains "*")
-//         {
-//           Bugs1 = Bugs1+1;
-//           //Bugs2 = Bugs2 +1;
-//         }
-//       }
-//     }
-     
-     
-    // n1 = g get "0 0 0";
+
      
      //Implement bounded BFS with a bound of 5 nodes
       for(h<-0 to 5)
@@ -225,58 +206,43 @@ object Threads {
          n1 = n2;
          if(n1.value contains "*")
          {
-           //println(n1.value);
            Bugs1 = Bugs1+1;
-           //Bugs2 = Bugs2 +1;
          }
      }
       }
      
          import g.ExtendedNodeVisitor
-              
-         //type ValDepth = (String,Int)
-         //var info = List.empty[ValDepth]
          
          var c = 1;
          n1 = g get "0 0 0";
          n1.innerNodeTraverser.withKind(BreadthFirst).foreach {
          ExtendedNodeVisitor((node, count, depth, informer) => {
            
-           
-             //info :+= (node.value, count)
              if((node.value contains "*") && count<1000 && c>1)
              {
-               //println("node:"+node.value); 
                 Bugs2 = Bugs2+1;
              }
              if(depth == 100)
              {
                 var n2 = node;
                 while((n2 findSuccessor (_.edges forall (_.directed))) != None)
-     {
-         val builder = g.newWalkBuilder(n2);
-         val n3= randomSuccessor(n2);         
-         builder.add(n3); 
-         n2 = n3;
-         if(n2.value contains "*")
-         {
-           //println(n1.value);
-           Bugs2 = Bugs2+1;
-           //Bugs2 = Bugs2 +1;
-         }
-     }
+                {
+                   val builder = g.newWalkBuilder(n2);
+                   val n3= randomSuccessor(n2);         
+                   builder.add(n3); 
+                   n2 = n3;
+                   if(n2.value contains "*")
+                   {
+                     Bugs2 = Bugs2+1;
+                   }
+                }
              }
                 
              
                
            c=c+1;
           })
-         
-         //println("Info:"+info);
-           
-     
-     //println("Bugs1:"+Bugs1);
-     //println("Bugs2:"+Bugs2);
+
       }
       
       
@@ -284,13 +250,9 @@ object Threads {
     //Implementing BDFS
       import g.ExtendedNodeVisitor
               
-         //type ValDepth = (String,Int)
-         //var info = List.empty[ValDepth]
         
       n1 = g get "0 0 0";
-      //var i =0;
       var Bugs3 = 0;
-       //var endNodes:Array[String] = new Array[String](10)
          n1.innerNodeTraverser.withKind(DepthFirst).foreach {
          ExtendedNodeVisitor((node, count, depth, informer) => {
              //info :+= (node.value, count)
@@ -330,14 +292,10 @@ object Threads {
          writer.close()
          println("Number of nodes = "+ g.order);
          println("Number of edges = "+ g.graphSize);
-         println("Z: ");
-         for(u<-1 to 50)
-           print( z(u) + " ");
-         println(" ");
-         println(" Total Number of bugs" + Totalcount);
+         println("Total Number of bugs " + Totalcount);
          println("Buggy states from random walk " + Bugs1);
          println("Buggy states from random walk + bounded BFS " + Bugs2/3);
-         println("Number of states that might violate liveness" + Bugs3);
+         println("Number of states that might violate liveness " + Bugs3);
          
       
   }
